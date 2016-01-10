@@ -46,3 +46,6 @@ RUN cd && \
 
 RUN mkdir -p /var/pagespeed/cache && \
     chown -R www-data:www-data /var/pagespeed/cache
+
+COPY nginx /etc/nginx
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
