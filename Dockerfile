@@ -53,15 +53,12 @@ COPY pagespeed.conf /etc/nginx/conf.d/pagespeed.conf
 # Configure Nginx and apply pagespeed
 RUN sed -i 's/^http {/&\n    include \/etc\/nginx\/conf.d\/pagespeed.conf;/g' /etc/nginx/nginx.conf
 
-# Define mountable directories.
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Define working directory.
-WORKDIR /etc/nginx
+VOLUME ["/var/cache/nginx"]
 
-# Define default command.
-CMD ["/usr/sbin/nginx"]
+EXPOSE 80 443
 
-# Expose ports.
-EXPOSE 80
-EXPOSE 443
+CMD ["nginx", "-g", "daemon off;"]
