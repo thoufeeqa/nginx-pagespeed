@@ -47,5 +47,21 @@ RUN cd && \
 RUN mkdir -p /var/pagespeed/cache && \
     chown -R www-data:www-data /var/pagespeed/cache
 
-COPY nginx /etc/nginx
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+COPY pagespeed.conf /etc/nginx/conf.d/pagespeed.conf
+
+# Configure Nginx and apply pagespeed
+RUN sed -i 's/^http {/&\n    include conf.d/pagespeed.conf;/g' /etc/nginx/nginx.conf
+
+# Define mountable directories.
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+
+# Define working directory.
+WORKDIR /etc/nginx
+
+# Define default command.
+CMD ["/usr/sbin/nginx"]
+
+# Expose ports.
+EXPOSE 80
+EXPOSE 443
