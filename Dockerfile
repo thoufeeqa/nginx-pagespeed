@@ -51,7 +51,7 @@ RUN mkdir -p /var/pagespeed/cache && \
 COPY pagespeed.conf /etc/nginx/conf.d/pagespeed.conf
 
 # Configure Nginx and apply pagespeed
-RUN sed -i 's/^http {/&\n    include conf.d/pagespeed.conf;/g' /etc/nginx/nginx.conf
+RUN sed -i 's/^http {/&\n    include conf.d\/pagespeed.conf;/g' /etc/nginx/nginx.conf
 
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
