@@ -1,9 +1,9 @@
 FROM buildpack-deps:jessie
 
-MAINTAINER EngageNExecute <code@engagenexecute.com>
+MAINTAINER Thoufeeq <thoufeeq@humblepaper.com>
 
-ENV NPS_VERSION 1.9.32.10
-ENV NGINX_VERSION 1.9.9
+ENV NPS_VERSION 1.10.33.6
+ENV NGINX_VERSION 1.8
 
 
 # Install packages.
