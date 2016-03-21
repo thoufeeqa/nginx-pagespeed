@@ -41,9 +41,10 @@ RUN cd && \
     --lock-path=/var/run/nginx.lock \
     --with-http_gunzip_module \
     --with-http_gzip_static_module && \
-    echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
     make && \
     make install
+
+RUN cd && echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 RUN mkdir -p /var/pagespeed/cache && \
     chown -R www-data:www-data /var/pagespeed/cache
