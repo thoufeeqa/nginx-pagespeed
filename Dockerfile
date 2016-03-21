@@ -44,7 +44,7 @@ RUN cd && \
     make && \
     make install
 
-RUN cd && echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+#RUN cd && echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 RUN mkdir -p /var/pagespeed/cache && \
     chown -R www-data:www-data /var/pagespeed/cache
