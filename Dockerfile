@@ -41,6 +41,7 @@ RUN cd && \
     --lock-path=/var/run/nginx.lock \
     --with-http_gunzip_module \
     --with-http_gzip_static_module && \
+    echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
     make && \
     make install
 
@@ -58,10 +59,14 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 VOLUME ["/var/cache/nginx"]
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
-EXPOSE 80 443
+CMD ["nginx"]
+#CMD ["nginx", "-g", "daemon off;"]
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80 
+EXPOSE 443
+
 
 
 
